@@ -12,11 +12,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 title,
                 content,
                 tags: tags.split(',').map(tag => tag.trim()),
-                date: new Date().toISOString()
+                date: new Date().toISOString()  // Save the current date and time
             };
+
             localStorage.setItem(`post-${title}`, JSON.stringify(post));
             alert('Post saved!');
-            window.location.href = 'index.html';
+            window.location.href = 'index.html';  // Redirect to main page after saving
         } else {
             alert('Please fill out all fields');
         }

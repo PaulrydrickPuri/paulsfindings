@@ -14,6 +14,7 @@
     <main>
         <p id="postContent"></p>
         <div id="postTags"></div>
+        <div id="postDate"></div>
     </main>
 
     <script>
@@ -26,6 +27,7 @@
                 document.getElementById('postTitle').textContent = post.title;
                 document.getElementById('postContent').textContent = post.content;
                 document.getElementById('postTags').innerHTML = `Tags: ${post.tags.join(', ')}`;
+                document.getElementById('postDate').innerHTML = `Posted on: ${new Date(post.date).toLocaleString()}`;
             }
         });
     </script>
