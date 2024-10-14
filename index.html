@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paulsfindings</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>My Blog</h1>
+        <button id="newPostBtn">New Post</button>
+    </header>
+
+    <main id="postList">
+        <!-- Blog posts will be dynamically inserted here -->
+    </main>
+
+    <!-- Modal for creating new post -->
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Create a New Post</h2>
+            <input type="text" id="postTitle" placeholder="Title">
+            <textarea id="postContent" placeholder="Write your post here..."></textarea>
+            <button id="savePostBtn">Save Post</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
