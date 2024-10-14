@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Post</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1 id="postTitle"></h1>
+    </header>
+
+    <main>
+        <p id="postContent"></p>
+        <div id="postTags"></div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const title = urlParams.get('title');
+            const post = JSON.parse(localStorage.getItem(`post-${title}`));
+
+            if (post) {
+                document.getElementById('postTitle').textContent = post.title;
+                document.getElementById('postContent').textContent = post.content;
+                document.getElementById('postTags').innerHTML = `Tags: ${post.tags.join(', ')}`;
+            }
+        });
+    </script>
+</body>
+</html>
