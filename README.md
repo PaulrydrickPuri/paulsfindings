@@ -3,6 +3,9 @@
 ## About
 This is about where my curiousity guides me.
 
+Link 
+-> https://paulrydrickpuri.github.io/paulsfindings/
+
 ## Notes
 
 #### 14-Oct-2024
