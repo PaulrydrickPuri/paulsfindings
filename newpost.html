@@ -4,25 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create New Post</title>
-    <link rel="stylesheet" href="newpost.css">
+    <!-- Include Showdown JS for Markdown conversion -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
+    <style>
+        /* CSS for the new post section */
+        #postContent {
+            width: 90%;
+            height: 400px;
+            border: 2px solid blue;
+            overflow-y: auto;
+            resize: none;
+            padding: 10px;
+        }
+        #saveButton {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Create New Post</h1>
-    </header>
+    <h1>Create New Post</h1>
 
-    <main>
-        <!-- Input fields for title, tags, and post content -->
-        <input type="text" id="postTitle" placeholder="Title" class="input-field">
-        <input type="text" id="postTags" placeholder="Tags (comma-separated)" class="input-field">
+    <form id="postForm">
+        <input type="text" name="title" id="postTitle" placeholder="Title" required><br><br>
+        <input type="text" name="tags" id="postTags" placeholder="Tags (comma-separated)"><br><br>
+        <!-- Textarea for the post content -->
+        <textarea id="postContent" placeholder="Please write here..."></textarea><br>
+        <button type="button" id="saveButton">Save Post</button>
+    </form>
 
-        <!-- Text area for writing post, with scroll when content overflows -->
-        <textarea id="postContent" placeholder="Please write here..." class="post-content"></textarea>
+    <script>
+        // Initialize Showdown converter
+        const converter = new showdown.Converter();
 
-        <!-- Save Post button repositioned to the middle bottom -->
-        <button id="savePostBtn" class="save-button">Save Post</button>
-    </main>
+        // Function to handle saving the post
+        document.getElementById('saveButton').addEventListener('click', function () {
+            const title = document.getElementById('postTitle').value;
+            const tags = document.getElementById('postTags').value;
+            const content = document.getElementById('postContent').value;
 
-    <script src="newpost.js"></script>
+            // Convert Markdown content to HTML
+            const htmlContent = converter.makeHtml(content);
+
+            // Save the post (you can change this to send the data to a server or save it in local storage)
+            const post = {
+                title: title,
+                tags: tags,
+                content: htmlContent,
+                date: new Date().toLocaleString(),
+            };
+
+            // Assuming you're saving the post in localStorage for simplicity
+            let posts = JSON.parse(localStorage.getItem('posts')) || [];
+            posts.push(post);
+            localStorage.setItem('posts', JSON.stringify(posts));
+
+            // Redirect to index.html or display success message
+            alert('Post saved successfully!');
+        });
+
+        // Handle paste event to detect if content is in Markdown
+        document.getElementById('postContent').addEventListener('paste', function (e) {
+            e.preventDefault();
+            const pastedText = e.clipboardData.getData('Text');
+            const formattedText = converter.makeHtml(pastedText);
+            document.getElementById('postContent').value = formattedText;
+        });
+    </script>
 </body>
 </html>

@@ -3,25 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Blog</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Blog Posts</title>
+    <style>
+        .post {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .post h2 {
+            color: #333;
+        }
+        .post-content {
+            white-space: pre-wrap;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Paulsfindings</h1>
-        <input type="text" id="searchBar" placeholder="Search by title or tag">
-        <button id="newPostBtn" class="top-right">New Post</button>
-    </header>
 
-    <main id="postList">
-        <!-- Blog posts will be dynamically inserted here -->
-        <div id="posts"></div>
-    </main>
+    <h1>All Blog Posts</h1>
+    <div id="postsContainer"></div>
 
-    <footer>
-        <p>&copy; 2024 My Blog</p>
-    </footer>
+    <script>
+        // Function to load and display the posts
+        function loadPosts() {
+            const posts = JSON.parse(localStorage.getItem('posts')) || [];
 
-    <script src="script.js"></script>
+            const postsContainer = document.getElementById('postsContainer');
+            postsContainer.innerHTML = ''; // Clear existing content
+
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.classList.add('post');
+                postElement.innerHTML = `
+                    <h2>${post.title}</h2>
+                    <div class="post-content">${post.content}</div>
+                    <p><strong>Tags:</strong> ${post.tags}</p>
+                    <p><strong>Posted on:</strong> ${post.date}</p>
+                `;
+                postsContainer.appendChild(postElement);
+            });
+        }
+
+        // Load posts when the page loads
+        window.onload = loadPosts;
+    </script>
+
 </body>
 </html>
