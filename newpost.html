@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create New Post</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="newpost.css">
 </head>
 <body>
     <header>
@@ -12,10 +12,15 @@
     </header>
 
     <main>
-        <input type="text" id="postTitle" placeholder="Title">
-        <textarea id="postContent" placeholder="Write your post here (supports code snippets)"></textarea>
-        <input type="text" id="postTags" placeholder="Tags (comma-separated)">
-        <button id="savePostBtn">Save Post</button>
+        <!-- Input fields for title, tags, and post content -->
+        <input type="text" id="postTitle" placeholder="Title" class="input-field">
+        <input type="text" id="postTags" placeholder="Tags (comma-separated)" class="input-field">
+
+        <!-- Text area for writing post, with scroll when content overflows -->
+        <textarea id="postContent" placeholder="Please write here..." class="post-content"></textarea>
+
+        <!-- Save Post button repositioned to the middle bottom -->
+        <button id="savePostBtn" class="save-button">Save Post</button>
     </main>
 
     <script src="newpost.js"></script>

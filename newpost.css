@@ -1,0 +1,73 @@
+/* Styles for the New Post page */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+header h1 {
+    margin: 20px 0;
+    text-align: center;
+}
+
+/* Input fields (Title and Tags) */
+.input-field {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Textarea for the post content, with scroll functionality */
+.post-content {
+    width: 90%;
+    height: 400px; /* Matches the blue box from the screenshot */
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #0073e6;
+    border-radius: 5px;
+    resize: none;  /* Prevents manual resizing by the user */
+    overflow-y: auto; /* Enables vertical scroll when content overflows */
+    white-space: pre-wrap; /* Ensures code formatting remains intact */
+}
+
+/* Save Post button repositioned to the middle bottom */
+.save-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    bottom: 0;
+}
+
+.save-button:hover {
+    background-color: #218838;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+textarea::-webkit-scrollbar {
+    width: 10px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background-color: #ffd700; /* Yellow scrollbar (matches the yellow box) */
+    border-radius: 5px;
+}
