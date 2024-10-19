@@ -3,50 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Posts</title>
-    <style>
-        .post {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 20px;
-        }
-        .post h2 {
-            color: #333;
-        }
-        .post-content {
-            white-space: pre-wrap;
-        }
-    </style>
+    <title>Simple Blog</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header class="header">
+        <input type="text" class="search-bar" placeholder="Search by title or tag...">
+        <button class="new-post-btn" onclick="window.location.href='newpost.html'">New Post</button>
+    </header>
 
-    <h1>All Blog Posts</h1>
-    <div id="postsContainer"></div>
+
+
+    <!-- Posts container -->
+    <div id="posts-container">
+        <!-- Posts will be rendered here -->
+    </div>
 
     <script>
-        // Function to load and display the posts
-        function loadPosts() {
-            const posts = JSON.parse(localStorage.getItem('posts')) || [];
+        const posts = JSON.parse(localStorage.getItem('posts')) || [];
 
-            const postsContainer = document.getElementById('postsContainer');
-            postsContainer.innerHTML = ''; // Clear existing content
+        function renderPosts() {
+            const postsContainer = document.getElementById('posts-container');
+            postsContainer.innerHTML = '';
+
+            if (posts.length === 0) {
+                postsContainer.innerHTML = '<p class="no-posts">No posts available yet. Click on "New Post" to add one!</p>';
+                return;
+            }
 
             posts.forEach(post => {
                 const postElement = document.createElement('div');
                 postElement.classList.add('post');
+                postElement.onclick = () => window.location.href = `viewpost.html?id=${post.id}`;
+
                 postElement.innerHTML = `
                     <h2>${post.title}</h2>
-                    <div class="post-content">${post.content}</div>
-                    <p><strong>Tags:</strong> ${post.tags}</p>
-                    <p><strong>Posted on:</strong> ${post.date}</p>
+                    <p class="post-content">${post.content.substring(0, 300)}...</p>
+                    <p>Posted on: ${new Date(post.createdAt).toLocaleString()}</p>
                 `;
+
                 postsContainer.appendChild(postElement);
             });
         }
 
-        // Load posts when the page loads
-        window.onload = loadPosts;
+        renderPosts();
     </script>
-
 </body>
 </html>
